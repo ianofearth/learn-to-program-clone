@@ -1,0 +1,10 @@
+<h1><%= @lesson.title %></h1>
+<p><%= @lesson.content %></p>
+
+<p><%= link_to "Edit", edit_subject_lesson_path(@subject, @lesson) %></p>
+<p><%= link_to "Delete", subject_lesson_path(@subject, @lesson),
+              :data => {:confirm => "Are you sure?",
+                :method => 'delete'} %></p>
+
+
+<%= link_to "Back to lessons", subject_path(@subject) %>

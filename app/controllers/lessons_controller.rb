@@ -4,6 +4,12 @@ class LessonsController < ApplicationController
     @lesson = @subject.lessons.new
   end
 
+  def show
+    @subject = Subject.find(params[:subject_id])
+    @lesson = Lesson.find(params[:id])
+  end
+
+
   def create
     @subject = Subject.find(params[:subject_id])
     @lesson = @subject.lessons.new(lesson_params)
@@ -25,7 +31,7 @@ class LessonsController < ApplicationController
     @lesson = Lesson.find(params[:id])
     if @lesson.update(lesson_params)
       flash[:notice] = @lesson.title + " has been updated!"
-      redirect_to subject_path(@subject)
+      redirect_to subject_lesson_path(@subject, @lesson)
     else
       render :edit
     end
