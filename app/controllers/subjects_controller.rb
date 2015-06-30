@@ -1,10 +1,11 @@
 class SubjectsController < ApplicationController
   def index
-    @subjects = Subject.all
+    @subjects = Subject.order(:number)
   end
 
   def show
     @subject = Subject.find(params[:id])
+    @lessons = @subject.lessons.order(:number)
   end
 
   def new
@@ -43,7 +44,7 @@ class SubjectsController < ApplicationController
 
   private
   def subject_params
-    params.require(:subject).permit(:title)
+    params.require(:subject).permit(:title, :number)
   end
 
 end

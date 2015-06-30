@@ -2,6 +2,8 @@
 
 <ul>
   <% @subjects.each do |subject| %>
-    <li><%= link_to subject.title, subject_path(subject) %></li>
+    <li><%= link_to subject.title, subject_path(subject) %> <%= subject.number %></li>
   <% end %>
 </ul>
+
+<%= link_to "Add a Subject", new_subject_path %>

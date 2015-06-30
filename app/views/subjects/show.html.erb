@@ -4,10 +4,10 @@
   <h4>Here are the available lessons:</h4>
 
   <ul>
-    <% @subject.lessons.each do |lesson| %>
-      <li>
-        <h3><%= link_to lesson.title, subject_lesson_path(@subject, lesson) %></h3>
-      </li>
+    <% @lessons.each do |lesson| %>
+        <li>
+          <h3><%= link_to lesson.title, subject_lesson_path(@subject, lesson) %> <%= lesson.number %></h3>
+        </li>
     <% end %>
   </ul>
 
