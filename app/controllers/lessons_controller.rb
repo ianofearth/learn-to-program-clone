@@ -15,6 +15,31 @@ class LessonsController < ApplicationController
     end
   end
 
+  def edit
+    @subject = Subject.find(params[:subject_id])
+    @lesson = Lesson.find(params[:id])
+  end
+
+  def update
+    @subject = Subject.find(params[:subject_id])
+    @lesson = Lesson.find(params[:id])
+    if @lesson.update(lesson_params)
+      flash[:notice] = @lesson.title + " has been updated!"
+      redirect_to subject_path(@subject)
+    else
+      render :edit
+    end
+  end
+
+  def destroy
+    @subject = Subject.find(params[:subject_id])
+    @lesson = Lesson.find(params[:id])
+    @lesson.destroy
+    flash[:notice] = @lesson.title + " has be utterly destroyed! HAHAHAHAHAHA!"
+    redirect_to subject_path(@subject)
+  end
+
+
 private
   def lesson_params
     params.require(:lesson).permit(:title, :content)
