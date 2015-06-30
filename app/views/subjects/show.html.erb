@@ -1,8 +1,31 @@
 <h1><%= @subject.title %></h1>
 
+<% if @subject.lessons.any? %>
+  <h4>Here are the available lessons:</h4>
+
+  <ul>
+    <% @subject.lessons.each do |lesson| %>
+      <li>
+        <h3><%= lesson.title %></h3>
+        <p><%= lesson.content %></p>
+        <p><%= link_to "Edit", edit_subject_lesson_path(@subject, lesson) %></p>
+        <p><%= link_to "Delete", subject_lesson_path(@subject, lesson),
+                      :data => {:confirm => "Are you sure?",
+                        :method => 'delete'} %></p>
+      </li>
+    <% end %>
+  </ul>
+
+<% else %>
+  <p>There are no lessons available for this subject!</p>
+
+<% end %>
+
 <p><%= link_to "Edit", edit_subject_path(@subject) %></p>
 <p><%= link_to "Delete", subject_path(@subject),
               :data => {:confirm => "Are you sure?",
                 :method => 'delete'} %></p>
+
+<p><%= link_to "Add a new lesson", new_subject_lesson_path(@subject) %></p>
 
 <p><%= link_to "Return to table of contents", subjects_path %></p>
